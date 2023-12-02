@@ -17,14 +17,14 @@ export const getTrendingMovies = async ()=>{
     return data;
 };
 
-// export const getMovieBySearch = async ()=>{
-//     const{data}= await axios.get('search/movie',{
-//         params:{
-//             query: query,
-//         }
-//     });
-//     return data;
-// };
+ export const getMovieBySearch = async ()=>{
+     const{data}= await axios.get('search/movie',{
+        params:{
+            query: 'query',
+       }
+    });
+    return data;
+ };
 
 export const getMovieById =async(movieId)=>{
     const{data}= await axios.get(`movie/${movieId}`,{
