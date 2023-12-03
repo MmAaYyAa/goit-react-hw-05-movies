@@ -3,7 +3,7 @@ import{getMovieBySearch} from 'api';
 import Searchbar from 'components/Searchbar/Searchbar';
 import MoviesList from 'components/MoviesList/MoviesList';
 import { Notify } from 'notiflix';
-import { Link } from 'react-router-dom'
+
 
 const Movies = () => {
   const[searchQuery,setSearchQuery]= useState('');

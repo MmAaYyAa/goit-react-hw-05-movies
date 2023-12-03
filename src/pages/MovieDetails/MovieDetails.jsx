@@ -5,7 +5,7 @@ import {getMovieById} from 'api';
 const BASE_PATH ="http://image.tmdb.org/t/p/original";
 
 const MovieDetails = () => {
-  const {movieId}=useParams();
+  const {movieId} = useParams();
 
   const[title,setTitle]=useState('');
   const[releaseDate,setReleaseDate]=useState();

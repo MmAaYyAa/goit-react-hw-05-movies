@@ -6,14 +6,16 @@ import Layout from "./Layout/Layout";
 
 export const App = () => {
   return (
-    
+    <div>
+ 
       <Routes>
-        <Route path="/" element={<Layout/>}>
-        <Route index element={<Home/>} />
-        <Route path="movies" element={<Movies/>}/>
-        <Route path="movies/:movieId" element={<MovieDetails/>}/>
+        <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="movies" element={<Movies />}/>
+        <Route path="movies/:movieId" element={<MovieDetails />}/>
         </Route>
+       
       </Routes>
-    
+      </div>
   );
 };
