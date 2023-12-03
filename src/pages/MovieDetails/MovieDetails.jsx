@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams,Outlet,NavLink,useLocation  } from 'react-router-dom';
 import {getMovieById} from 'api';
 
 const BASE_PATH ="http://image.tmdb.org/t/p/original";
@@ -7,15 +7,18 @@ const BASE_PATH ="http://image.tmdb.org/t/p/original";
 const MovieDetails = () => {
   const {movieId} = useParams();
 
-  const[title,setTitle]=useState('');
-  const[releaseDate,setReleaseDate]=useState();
-  const[genres,setGenres]=useState([]);
-  const[overview,setOverview]=useState('');
-  const[userScore,setUserScore]=useState();
-  const[poster,setPoster]=useState('');
+  const [title,setTitle] = useState('');
+  const [releaseDate,setReleaseDate] = useState();
+  const [genres,setGenres] = useState([]);
+  const [overview,setOverview] = useState('');
+  const [userScore,setUserScore] = useState();
+  const [poster,setPoster] = useState('');
 
-   useEffect(()=>{
-  const getSearchedMovie =async()=>{
+const location = useLocation();
+const linkBack = location?.state?.from ?? '/';
+
+   useEffect(() => {
+  const getSearchedMovie = async () => {
     try{
       const{
         poster_path,
@@ -24,15 +27,15 @@ const MovieDetails = () => {
         overview,
         release_date,
         genres,
-      }= await getMovieById(movieId);
+      } = await getMovieById(movieId);
 
       setPoster(BASE_PATH+poster_path);
       setTitle(title);
       setReleaseDate(release_date);
-      setUserScore(popularity);
+      setUserScore(`${Math.round(popularity / 10)}%`);
       setOverview(overview);
       setGenres(genres);
-    }catch(error){
+    } catch(error) {
       console.log('error.message', error.message);
     }
   };
@@ -41,6 +44,7 @@ const MovieDetails = () => {
 
   return (
     <div>
+      <NavLink to={linkBack}>Go Back</NavLink>
       <div>
       <img src={poster} alt={title} />
       </div>
@@ -54,6 +58,18 @@ const MovieDetails = () => {
           <li key={genre.id}>{genre.name}</li>
         ))}
       </ul>
+      <div>
+      <h5>Additional information</h5>
+      <ul>
+        <li>
+          <NavLink to={`/movies/${movieId}/cast`}>Cast</NavLink>
+          </li>
+        <li>
+        <NavLink to={`/movies/${movieId}/reviews`}>Reviews</NavLink>
+        </li>
+      </ul>
+      </div>
+      <Outlet/>
     </div>
   );
 };

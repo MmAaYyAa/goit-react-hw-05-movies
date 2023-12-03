@@ -9,13 +9,13 @@ const Movies = () => {
   const[searchQuery,setSearchQuery]= useState('');
   const[searchedMovies,setSearchedMovies]=useState([]);
   
-  useEffect(()=>{
+  useEffect (() => {
     if(!searchQuery){
       return;
     }
 
-    const getSearchedMovies =async()=>{
-      try{
+    const getSearchedMovies = async () => {
+      try {
         const{results}=await getMovieBySearch(searchQuery);
         if(!results.length){
           Notify.failure('Sorry,nothing was found for your request.Please,try again.');
@@ -24,20 +24,17 @@ const Movies = () => {
         if(results.length>0){
           setSearchedMovies(results);
         }
-      }catch(error){
+      } catch(error){
         console.log(error.message);
       }
     };
     getSearchedMovies();
   },[searchQuery]);
 
-  const handleFormSubmit = searchQuery=>{
+  const handleFormSubmit = searchQuery => {
     setSearchedMovies([]);
     setSearchQuery(searchQuery);
   }
-  
-  
-  
   
   return (
     <>
