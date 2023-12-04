@@ -7,10 +7,13 @@ import {
   SearchFormInput,
 } from './Searchbar.styled';
 import { Notify } from 'notiflix';
+//import { useSearchParams,} from 'react-router-dom';
+
 
 export default function Searchbar({onSubmit}) {
+  const[inputQuery, setInputQuery] = useState('')
+  //const [searchParams, setSearchParams] = useSearchParams();
 
-  const[inputQuery, setInputQuery]= useState('')
   const handleInputChange = event => {
     setInputQuery(event.currentTarget.value.toLowerCase());
   };

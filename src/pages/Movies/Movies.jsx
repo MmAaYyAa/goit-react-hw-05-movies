@@ -3,12 +3,19 @@ import{getMovieBySearch} from 'api';
 import Searchbar from 'components/Searchbar/Searchbar';
 import MoviesList from 'components/MoviesList/MoviesList';
 import { Notify } from 'notiflix';
-
+import { useSearchParams,useNavigate } from 'react-router-dom';
 
 const Movies = () => {
   const[searchQuery,setSearchQuery]= useState('');
   const[searchedMovies,setSearchedMovies]=useState([]);
-  
+  const [searchParams,setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const query = searchParams.get('query') ?? '';
+ 
+  useEffect(() => {
+    setSearchQuery(query);
+  }, [query]);
+
   useEffect (() => {
     if(!searchQuery){
       return;
@@ -34,6 +41,7 @@ const Movies = () => {
   const handleFormSubmit = searchQuery => {
     setSearchedMovies([]);
     setSearchQuery(searchQuery);
+    navigate(`?query=${searchQuery}`);
   }
   
   return (
