@@ -1,18 +1,15 @@
-import React from 'react'
-import { NavLink,Outlet } from 'react-router-dom'
+import React,  { Suspense }  from 'react'
+import { Outlet } from 'react-router-dom';
+import Header from 'components/Header/Header';
+
 
 const Layout = () => {
   return (
   <div> 
-    <ul>
-      <li>
-        <NavLink to="/">Home</NavLink>
-      </li>
-      <li> 
-       <NavLink to="/movies">Movies</NavLink>
-      </li>
-   </ul>
+    <Header/>
+    <Suspense fallback={<div>Loading...</div>}>
     <Outlet/>
+    </Suspense>
   </div>
   )
 }

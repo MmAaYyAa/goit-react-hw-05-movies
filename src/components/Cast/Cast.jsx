@@ -11,12 +11,12 @@ const Cast = () => {
 try {
   const {cast} = await getMovieCast(movieId);
   const CastInfo = () => 
-   cast.map(({name, profile_path, id, character }) => {
+   cast.map(({name, profile_path, id }) => {
     return {
       name,
       poster: BAZE_PATH + profile_path,
       id,
-      character,
+    
     };
    });
    setMoviesCast(CastInfo);
@@ -36,7 +36,7 @@ try {
        <ul>
         {moviesCast.map(({ name, poster, id, }) => (
           <li key={id}>
-            <img src={poster} width={250} alt="name" />
+            <img src={poster } width={250} alt="name" />
             <p>{name}</p>
             
           </li>

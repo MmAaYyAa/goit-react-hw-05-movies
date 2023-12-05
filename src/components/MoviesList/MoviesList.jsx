@@ -12,16 +12,16 @@ const defaultImg =
             <li key={id}>
                 <Link to={`/movies/${id}`} state={{from: location}} >
                   <h3>{title}</h3>
-                  </Link>
-                  <img
-              src={poster_path
-                  ? `https://image.tmdb.org/t/p/w500${poster_path}`
-                  : defaultImg
-              }
-              width={250}
-              alt="poster"
-            />
-            </li>
+                 <img
+                   src={poster_path
+                   ? `https://image.tmdb.org/t/p/w500${poster_path}`
+                   : defaultImg
+                   }
+                   width={250}
+                   alt="poster"
+                 />
+               </Link>
+           </li>
         ))}
     </div>
   );

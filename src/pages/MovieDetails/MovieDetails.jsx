@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect, Suspense   } from 'react';
 import { useParams,Outlet,NavLink,useLocation  } from 'react-router-dom';
 import {getMovieById} from 'api';
 
@@ -69,7 +69,9 @@ const linkBack = location?.state?.from ?? '/';
         </li>
       </ul>
       </div>
+      <Suspense fallback={<div>Loading...</div>}>
       <Outlet/>
+      </Suspense>
     </div>
   );
 };
