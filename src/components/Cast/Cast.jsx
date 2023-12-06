@@ -14,7 +14,7 @@ try {
    cast.map(({name, profile_path, id }) => {
     return {
       name,
-      poster: BAZE_PATH + profile_path,
+      poster:  profile_path ? BAZE_PATH + profile_path : defaultImg,
       id,
     
     };
@@ -36,7 +36,7 @@ try {
        <ul>
         {moviesCast.map(({ name, poster, id, }) => (
           <li key={id}>
-            <img src={poster } width={250} alt="name" />
+            <img src={poster} width={250} alt="name" />
             <p>{name}</p>
             
           </li>

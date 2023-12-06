@@ -4,25 +4,23 @@ import Searchbar from 'components/Searchbar/Searchbar';
 import MoviesList from 'components/MoviesList/MoviesList';
 import { Notify } from 'notiflix';
 import { useSearchParams,} from 'react-router-dom';
+import Loader from 'components/Loader/Loader';
 
 const Movies = () => {
-  const[searchQuery,setSearchQuery]= useState('');
-  const[searchedMovies,setSearchedMovies]=useState([]);
+  const[searchedMovies,setSearchedMovies] = useState([]);
   const [searchParams,setSearchParams] = useSearchParams();
+  const[isLoading,setIsLoading] = useState(false);
   const query = searchParams.get('query') ?? '';
  
-  useEffect(() => {
-    setSearchQuery(query);
-  }, [query]);
-
   useEffect (() => {
-    if(!searchQuery){
+    if(!query){
       return;
     }
 
     const getSearchedMovies = async () => {
+      setIsLoading(true);
       try {
-        const{results}=await getMovieBySearch(searchQuery);
+        const{results}=await getMovieBySearch(query);
         if(!results.length){
           Notify.failure('Sorry,nothing was found for your request.Please,try again.');
           return;
@@ -32,24 +30,26 @@ const Movies = () => {
         }
       } catch(error){
         console.log(error.message);
+      }finally {
+        setIsLoading(false);
       }
     };
     getSearchedMovies();
-  },[searchQuery]);
+  },[query]);
 
-  const handleFormSubmit = searchQuery => {
+  const handleFormSubmit = query=> {
+setSearchParams({query})
     setSearchedMovies([]);
-    //setSearchQuery(searchQuery);
-    setSearchParams({ query: searchQuery });
+  
   }
   
   return (
     <>
       <Searchbar onSubmit={handleFormSubmit} />
+      {isLoading && <Loader />}
       {searchedMovies && searchedMovies.length > 0 && (
         <MoviesList
           movies={searchedMovies}
-          setSearchedMovies={setSearchedMovies}
         ></MoviesList>
       )}
     </>

@@ -1,18 +1,18 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-
+import {List, Item, Img, Title, StyledLink} from './MoviesList.styled'
 const MoviesList = ({movies}) => {
 const location = useLocation();
 const defaultImg =
     'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
 
   return (
-    <div>
+    <List>
         {movies.map(({title, id, poster_path})=>(
-            <li key={id}>
-                <Link to={`/movies/${id}`} state={{from: location}} >
-                  <h3>{title}</h3>
-                 <img
+            <Item key={id}>
+                <StyledLink to={`/movies/${id}`} state={{from: location}} >
+                  <Title>{title}</Title>
+                 <Img
                    src={poster_path
                    ? `https://image.tmdb.org/t/p/w500${poster_path}`
                    : defaultImg
@@ -20,10 +20,10 @@ const defaultImg =
                    width={250}
                    alt="poster"
                  />
-               </Link>
-           </li>
+               </StyledLink>
+           </Item>
         ))}
-    </div>
+    </List>
   );
 };
 
