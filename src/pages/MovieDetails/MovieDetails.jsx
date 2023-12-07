@@ -1,5 +1,5 @@
 import React, { useState,useEffect, Suspense   } from 'react';
-import { useParams,Outlet,NavLink,useLocation  } from 'react-router-dom';
+import { useParams,Outlet,useLocation  } from 'react-router-dom';
 import {getMovieById} from 'api';
 import {LinkBack, Img, Container, MovieInfo, MovieTitle, InfoTitle, P, AddInfo, InfoDiv} from './MovieDetails.styled'
 const BASE_PATH ="http://image.tmdb.org/t/p/w500";
