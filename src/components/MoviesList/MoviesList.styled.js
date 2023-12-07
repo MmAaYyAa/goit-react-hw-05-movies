@@ -41,7 +41,7 @@ export const Img = styled.img`
 export const Title = styled.p`
   font-size: 16px;
   font-weight: 700;
-  color: black;
+  color: #22313f;
 `;
 
 export const StyledLink = styled(Link)`

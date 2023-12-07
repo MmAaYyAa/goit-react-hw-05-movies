@@ -1,8 +1,8 @@
 import React, { useState,useEffect, Suspense   } from 'react';
 import { useParams,Outlet,NavLink,useLocation  } from 'react-router-dom';
 import {getMovieById} from 'api';
-
-const BASE_PATH ="http://image.tmdb.org/t/p/original";
+import {LinkBack, Img, Container, MovieInfo, MovieTitle, InfoTitle, P, AddInfo, InfoDiv} from './MovieDetails.styled'
+const BASE_PATH ="http://image.tmdb.org/t/p/w500";
 
 const MovieDetails = () => {
   const {movieId} = useParams();
@@ -43,36 +43,36 @@ const linkBack = location?.state?.from ?? '/';
    },[movieId])
 
   return (
-    <div>
-      <NavLink to={linkBack}>Go Back</NavLink>
+    <Container>
+      <LinkBack to={linkBack}>Back</LinkBack>
+      <MovieInfo>
+      <Img src={poster} alt={title} />
       <div>
-      <img src={poster} alt={title} />
+      <MovieTitle>{title} ({releaseDate})</MovieTitle>
+      <P>User Score: {userScore}</P>
+      <InfoTitle>Overview</InfoTitle>
+       <P>{overview}</P> 
+      <InfoTitle>Genres</InfoTitle>
+      <P>
+        {genres.map(({name}) => name).join(', ')}
+      </P>
       </div>
-      <h3>{title} ({releaseDate})</h3>
-      <p>User Score: {userScore}</p>
-      <h4>Overview</h4>
-       <p>{overview}</p> 
-      <h4>Genres</h4>
-      <ul>
-        {genres.map(genre=>(
-          <li key={genre.id}>{genre.name}</li>
-        ))}
-      </ul>
-      <div>
-      <h5>Additional information</h5>
+      </MovieInfo>
+      <InfoDiv>
+      <InfoTitle>Additional information</InfoTitle>
       <ul>
         <li>
-          <NavLink to={`/movies/${movieId}/cast`}>Cast</NavLink>
+          <AddInfo to={`/movies/${movieId}/cast`}>Cast</AddInfo>
           </li>
         <li>
-        <NavLink to={`/movies/${movieId}/reviews`}>Reviews</NavLink>
+        <AddInfo to={`/movies/${movieId}/reviews`}>Reviews</AddInfo>
         </li>
       </ul>
-      </div>
+      </InfoDiv>
       <Suspense fallback={<div>Loading...</div>}>
       <Outlet/>
       </Suspense>
-    </div>
+    </Container>
   );
 };
 

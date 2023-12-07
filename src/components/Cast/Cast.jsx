@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {getMovieCast} from 'api';
+import {List, Item, Name} from './Cast.styled';
+
 const BAZE_PATH = 'https://image.tmdb.org/t/p/original';
 const Cast = () => {
   const [ moviesCast, setMoviesCast] = useState([]);
@@ -33,15 +35,15 @@ try {
 
   return (
     <div>
-       <ul>
+       <List>
         {moviesCast.map(({ name, poster, id, }) => (
-          <li key={id}>
+          <Item key={id}>
             <img src={poster} width={250} alt="name" />
-            <p>{name}</p>
+            <Name>{name}</Name>
             
-          </li>
+          </Item>
         ))}
-      </ul>
+      </List>
     </div>
   )
 }

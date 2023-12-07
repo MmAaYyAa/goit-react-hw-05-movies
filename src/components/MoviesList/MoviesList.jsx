@@ -11,7 +11,6 @@ const defaultImg =
         {movies.map(({title, id, poster_path})=>(
             <Item key={id}>
                 <StyledLink to={`/movies/${id}`} state={{from: location}} >
-                  <Title>{title}</Title>
                  <Img
                    src={poster_path
                    ? `https://image.tmdb.org/t/p/w500${poster_path}`
@@ -20,6 +19,7 @@ const defaultImg =
                    width={250}
                    alt="poster"
                  />
+                 <Title>{title}</Title>
                </StyledLink>
            </Item>
         ))}
